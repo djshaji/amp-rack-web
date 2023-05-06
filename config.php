@@ -3,9 +3,9 @@ $config = array (
     "dir"=> "/var/www/amp",
     "filesdir"=> "/var/www/amp/files",
     "serviceAccount"=> "/var/www/amp-admin/amp-rack-firebase-adminsdk-h9jwj-b9993828c2.json",
-    "database" => "mysql:host=localhost;dbname=letsgodil;charset=utf8mb4",
-    "database_user" => "clover",
-    "database_pass" => "iloveshajikhan",
+    "database" => "mysql:host=localhost;dbname=amp;charset=utf8mb4",
+    "database_user" => "amp",
+    "database_pass" => "remembermyname",
     "codename" => "Amp Rack Guitar Effects",
     "description" => "Amp Rack is a Guitar / Voice Audio Effects Processor for Android. Amp Rack is an Open Source LADSPA Plugins Host for Android. More than 150 high quality audio plugins are available which can be added in any order to the audio effect chain to create distinct high quality tones for your guitar!",
     "skin" => "materia",
@@ -40,5 +40,6 @@ $config = array (
           </div>'
   );
   
+  $FILES_JSON = json_decode (file_get_contents ("files.json"), true);
   
 ?>

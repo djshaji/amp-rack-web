@@ -1,0 +1,29 @@
+{
+    "Presets": {
+        "Title":"text",
+        "Description":"text",
+        "Download": "file",
+        "Preview":"file"
+    },
+
+    "Themes": {
+        "Title":"text",
+        "Description":"text",
+        "Download": "file",
+        "Screenshot":"file"
+    },
+
+    "Drum Loops": {
+        "Title":"text",
+        "Description":"text",
+        "Download": "file",
+        "Preview":"file"
+    }, 
+
+    "Rhythm Loops": {
+        "Title":"text",
+        "Description":"text",
+        "Download": "file",
+        "Preview":"file"
+    }
+}
