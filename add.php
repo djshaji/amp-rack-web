@@ -1,7 +1,7 @@
 <?php
-#ini_set('display_errors', '1');
-#ini_set('display_startup_errors', '1');
-#error_reporting(E_ALL);
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
 
 require ("vendor/autoload.php");
 
@@ -9,6 +9,9 @@ chdir (__DIR__);
 include "config.php";
 include "anneli/header.php";
 include "anneli/db.php";
+
+$labels = array () ;
+$LABELS ["Download"] = "Upload " . $_GET ["type"] . " file" ;
 
 if ($_POST != null) {
   // var_dump ($_FILES);
@@ -63,9 +66,14 @@ if ($_POST != null) {
 
   <?php
   foreach ($FILES_JSON [$_GET ["type"]] as $name => $type) {
+    $label = $name ;
+    // var_dump (in_array ($name, $LABELS)) ;
+
+    if ($LABELS [$name] != null)
+      $label = $LABELS [$name];
     ?>
     <div class="mb-3">
-      <label  class="form-label"><?php echo $name;?>&nbsp;&nbsp;</label>
+      <label  class="form-label"><?php echo $label;?>&nbsp;&nbsp;</label>
       <input name="<?php echo $name ;?>" type="<?php echo $type ;?>" class="form-control" id="<?php echo $name ;?>" >
     </div>
     <?php
