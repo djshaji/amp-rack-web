@@ -25,5 +25,12 @@
         "Description":"text",
         "Download": "file",
         "Preview":"file"
+    },
+
+    "Videos": {
+        "Title":"text",
+        "Description":"text",
+        "Youtube URL": "text",
+        "Screenshot":"file"
     }
 }
