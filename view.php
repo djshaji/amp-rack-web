@@ -27,7 +27,14 @@ function isY () {
 }
 
 include "anneli/db.php";
-$sql = "SELECT * from files where type = '$type' order by id DESC limit 30;" ;
+$page = $_GET ["page"] ;
+if ($page == null)
+  $page = 1 ;
+
+$offset = $page - 1 ;
+$offset = $offset * 30 ;
+
+$sql = "SELECT * from files where type = '$type' and approved = true order by id DESC limit $offset, 30 ;" ;
 $q = $db -> prepare ($sql) ;
 $result = $q -> execute () ;
 $result = $q -> fetchAll () ;
@@ -71,6 +78,31 @@ $result = $q -> fetchAll () ;
       }
     ?>
   </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <ul class="pagination pagination-lg">
+    <?php
+      for ($i = $page - 1 ; $i > 0 ; $i --) { ?>
+        <li class="page-item">
+          <a class="page-link" href="/view.php?type=<?php echo $type . "&page=$i";?>"><?php echo $i;?></a>
+        </li>
+      <?php
+        if ($i < $page - 5)
+          break ;
+      }
+
+      for ($i = $page ; $i < $page + 5 ; $i ++) { ?>
+        <li class="page-item <?php if ($i == $page) echo "active" ;?>">
+          <a class="page-link" href="/view.php?type=<?php echo $type . "&page=$i";?>"><?php echo $i;?></a>
+        </li>
+      <?php }
+    ?>
+    <li class="page-item">
+      <a class="page-link" href="/view.php?type=<?php $pp = $page + 1;  echo $type . "&page=$pp";?>">Next</a>
+    </li>
+
+  </ul>
 </div>
 
 <?php 
