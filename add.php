@@ -19,9 +19,18 @@ if ($_POST != null) {
   $s = "uid" ;
   $v = ":uid" ;
   foreach ($_FILES as $ftitle => $fname) {
-    $filename = "files/".$fname ["name"] .".". explode ("/", $fname ["type"]) [1] ;
+    $ext = explode ("/", $fname ["type"]);
+    if ($ext [0] == "")
+      $ext = "txt";
+    else 
+      $ext = $ext [1];
+    $filename = "files/".$_GET["type"] ."/".$uid."/".$fname ["name"] . "-" . time () .".". $ext ;
+    // var_dump ($filename);
+    if (!file_exists (dirname ($filename)))
+      mkdir (dirname ($filename),  0777, true) ;
     if (!move_uploaded_file ($fname ["tmp_name"], $filename)) {
       ?><div class="alert alert-danger h3"><?php
+      // var_dump ($fname);
       die (error_get_last ()["message"]);
     } else {
       $_POST [$ftitle] = $filename ;
@@ -39,6 +48,8 @@ if ($_POST != null) {
   $statement = "INSERT into files ($s) values ($v) ;" ;
   // print ($statement);
   // var_dump ($_POST);
+  $type = $_GET ["type"];
+  echo "<script>fileType = '$type'</script>" ;
   $sql = $db -> prepare ($statement);
   if ($sql->execute( $_POST )) {
     ?>
@@ -48,7 +59,7 @@ if ($_POST != null) {
         'The file has been uploaded successfully',
         'success'
       ).then((result) => {
-        location.href = "/"
+        location.href = "/view.php?type=" + fileType;
       })
     </script>
     <?php

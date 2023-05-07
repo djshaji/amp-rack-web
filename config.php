@@ -1,4 +1,5 @@
 <?php
+$FILES_JSON = json_decode (file_get_contents ("files.json"), true);
 $config = array (
     "dir"=> "/var/www/amp",
     "filesdir"=> "/var/www/amp/files",
@@ -18,12 +19,7 @@ $config = array (
     "privacy-policy"=> null,
     "logo" => "/logo.png",
 
-    "drawer" => array (
-      "Themes"=> '?list=1',
-      "Presets"=> '?icons=1',
-      "Connect Guitar to Phone" => "",
-      "About"=> "/anneli/about.php"
-    ),
+    "drawer" => array (),
     "messages" => array (
       "new"=> true
     ),
@@ -40,6 +36,11 @@ $config = array (
           </div>'
   );
   
-  $FILES_JSON = json_decode (file_get_contents ("files.json"), true);
+  $drawer_controls = array () ;
+  foreach ($FILES_JSON as $name => $data) {
+    $config ["drawer"] [$name] = "/view.php?type=" . $name ;
+  }
   
+  $config ["drawer"]["Connect Guitar to Phone"] = "/anneli/about.php" ;
+  $config ["drawer"]["About"] = "/anneli/about.php" ;
 ?>

@@ -8,28 +8,63 @@ require ("vendor/autoload.php");
 chdir (__DIR__);
 include "config.php";
 include "anneli/header.php";
+include "anneli/ui.php" ;
+
 $type = $_GET ["type"];
+
+function isAudio () {
+  global $type ;
+  if ($type == "Drum Loops" || $type == "Rhythm Loops")
+    return true ;
+  return false ;
+}
+
+function isY () {
+  global $type ;
+  if ($type == "Videos")
+    return true ;
+  return false ;
+}
+
 include "anneli/db.php";
 $sql = "SELECT * from files where type = '$type' order by id DESC limit 30;" ;
 $q = $db -> prepare ($sql) ;
 $result = $q -> execute () ;
 $result = $q -> fetchAll () ;
-var_dump ($result);
+// var_dump ($result);
 ?>
 <div class="section">
   <div class="alert alert-primary h2"><?php echo $type ;?></div>
   <div class="row m-4 p-2 justify-content-center">
     <?php
       foreach ($result as $card) {
+        if (isAudio ())
+          $card ["Preview"] = $card ["Download"] ;
+        if (isY ()) {
+          $card ["stub"] = explode ("?v=", $card ["Youtube_URL"])[1];
+          // var_dump ($card);
+        }
         ?>
-        <div class="card">
+        <div class="card col-md-3 <?php if (isY()) echo "bg-dark text-white m-2";?>">
           <div class="card-header">
-            Featured
+            <?php if ($card ["Screenshot"] != null) { ?>
+              <img class="img-fluid" src="<?php echo $card ["Screenshot"] ;?>">
+            <?php } else if ($card ["Preview"] != null) { ?>
+              <audio style="width: 265px;" controls>
+                <source src="<?php echo $card ["Preview"] ;?>">
+              </audio>
+            <?php } else if (isY ()) { ?>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/<?php echo $card["stub"];?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>              
+                <?php } ?>
           </div>
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title"><?php echo $card ["Title"] ;?></h5>
+            <p class="card-text">
+              <?php echo $card ["Description"] ;?>
+            </p>
+            <?php if ($card ["Download"] != null) { ?>
+              <a download href="<?php echo $card ["Download"] ;?>" class="btn btn-primary">Download</a>
+            <?php } ?>
           </div>
         </div>
         <?php
@@ -37,6 +72,14 @@ var_dump ($result);
     ?>
   </div>
 </div>
+
+<?php 
+$links = array () ;
+foreach ($FILES_JSON as $_type=>$_data) {
+  $links [$_type] = "/add.php?type=$_type" ;
+}
+fab ("new", $links);
+?>
 <?php
 include "anneli/footer.php";
 ?>

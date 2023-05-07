@@ -16,21 +16,18 @@
     "Drum Loops": {
         "Title":"text",
         "Description":"text",
-        "Download": "file",
-        "Preview":"file"
+        "Download": "file"
     }, 
 
     "Rhythm Loops": {
         "Title":"text",
         "Description":"text",
-        "Download": "file",
-        "Preview":"file"
+        "Download": "file"
     },
 
     "Videos": {
         "Title":"text",
         "Description":"text",
-        "Youtube URL": "text",
-        "Screenshot":"file"
+        "Youtube URL": "text"
     }
 }
