@@ -71,8 +71,8 @@ if ($_POST != null) {
 }
 ?>
 
-<div class="section row m-3 p-3 justify-content-center">
-  <form enctype="multipart/form-data" method="post" action="add.php?type=<?php echo $_GET ["type"];?>" class="col-7 shadow p-3 shadow border border-primary">
+<div class="section row m-3  justify-content-center">
+  <form enctype="multipart/form-data" method="post" action="add.php?type=<?php echo $_GET ["type"];?>" class="col-md-7 shadow p-3 shadow border border-primary">
     <h3 class="alert shadow alert-primary">Add <?php echo $_GET ["type"];?></h3>
 
   <?php
