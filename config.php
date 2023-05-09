@@ -43,4 +43,5 @@ $config = array (
   
   $config ["drawer"]["Connect Guitar to Phone"] = "/anneli/about.php" ;
   $config ["drawer"]["About"] = "/anneli/about.php" ;
+  $root_user = 'lWDjT6ENhgV9Hs6JHIjFAcacpAo1' ;
 ?>

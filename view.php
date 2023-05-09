@@ -33,8 +33,13 @@ if ($page == null)
 
 $offset = $page - 1 ;
 $offset = $offset * 30 ;
+if ($uid == $root_user)
+    $bypass = "or true " ;
+else
+    $bypass = "" ;
 
-$sql = "SELECT * from files where type = '$type' and approved = true order by id DESC limit $offset, 30 ;" ;
+$sql = "SELECT * from files where type = '$type' and (approved = true or uid = '$uid' $bypass) order by id DESC limit $offset, 30 ;" ;
+//echo $sql ;
 $q = $db -> prepare ($sql) ;
 $result = $q -> execute () ;
 $result = $q -> fetchAll () ;
@@ -71,7 +76,12 @@ $result = $q -> fetchAll () ;
             </p>
             <?php if ($card ["Download"] != null) { ?>
               <a download href="<?php echo $card ["Download"] ;?>" class="btn btn-primary">Download</a>
-            <?php } ?>
+            <?php } 
+               if ($uid == $root_user && $card ["approved"] === null) { ?>
+                   <a href="/approve.php?id=<?php echo $card ["id"] ;?>" class="btn btn-success">Approve</a>
+
+            <?php }
+            ?>
           </div>
         </div>
         <?php
