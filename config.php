@@ -37,6 +37,8 @@ $config = array (
   );
   
   $drawer_controls = array () ;
+//  if ($uid != null)
+  $config ["drawer"]["My Account"] = "/view.php?my=1" ;
   foreach ($FILES_JSON as $name => $data) {
     $config ["drawer"] [$name] = "/view.php?type=" . $name ;
   }
@@ -46,3 +48,4 @@ $config = array (
   $config ["drawer"]["About"] = "/anneli/about.php" ;
   $root_user = 'lWDjT6ENhgV9Hs6JHIjFAcacpAo1' ;
 ?>
+<script src="util.js"></script>

@@ -1,7 +1,5 @@
 <?php
-// ini_set('display_errors', '1');
-// ini_set('display_startup_errors', '1');
-// error_reporting(E_ALL);
+//ini_set('display_errors', '1');ini_set('display_startup_errors', '1');error_reporting(E_ALL);
 
 require ("vendor/autoload.php");
 
@@ -9,8 +7,14 @@ chdir (__DIR__);
 include "config.php";
 include "anneli/header.php";
 include "anneli/ui.php" ;
+include_once "anneli/functions.php" ;
 
 $type = $_GET ["type"];
+
+if ($uid == null && $_GET ["my"] != null) {
+  require_login () ;
+  die () ;
+}
 
 function isAudio () {
   global $type ;
@@ -38,8 +42,15 @@ if ($uid == $root_user)
 else
     $bypass = "" ;
 
-$sql = "SELECT * from files where type = '$type' and (approved = true or uid = '$uid' $bypass) order by id DESC limit $offset, 30 ;" ;
-//echo $sql ;
+$my = null ;
+if ($_GET ["my"] != null) {
+  $my = "or uid = '$uid'" ;
+} else
+  $my = "" ;
+  
+//var_dump ($_GET);
+$sql = "SELECT * from files where type = '$type' and (approved = true or uid = '$uid' $bypass) $my order by id DESC limit $offset, 30 ;" ;
+// echo $sql ;
 $q = $db -> prepare ($sql) ;
 $result = $q -> execute () ;
 $result = $q -> fetchAll () ;
@@ -83,7 +94,11 @@ $result = $q -> fetchAll () ;
                    <a href="/delete.php?id=<?php echo $card ["id"] ;?>" class="btn btn-danger">Delete</a>
                  </div>
 
-            <?php }
+            <?php } else if ($uid == $card ["uid"]) { ?>
+                 <div class="mt-3 card-footer text-muted">
+                   <a href="javascript: deleteFile ('<?php echo $card ['Title'];?>', '<?php echo $card ["id"] ;?>')" class="btn btn-danger">Delete</a>
+                 </div>
+              <?php }
             ?>
           </div>
         </div>

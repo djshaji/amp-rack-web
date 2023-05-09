@@ -1,5 +1,5 @@
 <?php
-// ini_set('display_errors', '1');ini_set('display_startup_errors', '1'); error_reporting(E_ALL);
+//ini_set('display_errors', '1');ini_set('display_startup_errors', '1'); error_reporting(E_ALL);
 
 require ("vendor/autoload.php");
 
@@ -18,9 +18,21 @@ if ($id == null ) {
     die ("incorrect usage") ;
 }
 
-$sql = "DELETE from files where id = $id ;";
+$fetch = "SELECT * from files where id = ?" ;
+$st = $db -> prepare ($fetch);
+$result = $st -> execute ([$id]);
+if ($result)
+  $result = $st -> fetch () ;
+else 
+  die ("No data found");
+
+if ($result ["uid"] != $uid) {
+  die ("<h2 class='alert alert-danger'>Unauthorized 403</h2>") ;
+}
+
+$sql = "DELETE from files where id = ? and uid = '$uid';";
 $statement = $db -> prepare ($sql) ;
-if ($statement->execute()) { ?>
+if ($statement->execute([$id])) { ?>
 <script>
 Swal.fire(
   'Deleted preset',
