@@ -19,3 +19,8 @@ $Parsedown = new Parsedown();
 include "anneli/footer.php" ;
 ?>
 
+<script>
+for (i of document.getElementsByTagName ("img"))
+    i.classList.add ("img-fluid")
+
+</script>
