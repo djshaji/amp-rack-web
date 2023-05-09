@@ -7,7 +7,7 @@ $config = array (
     "database" => "mysql:host=localhost;dbname=amp;charset=utf8mb4",
     "database_user" => "amp",
     "database_pass" => "remembermyname",
-    "codename" => "Amp Rack Guitar Effects",
+    "codename" => "Amp Rack",
     "description" => "Amp Rack is a Guitar / Voice Audio Effects Processor for Android. Amp Rack is an Open Source LADSPA Plugins Host for Android. More than 150 high quality audio plugins are available which can be added in any order to the audio effect chain to create distinct high quality tones for your guitar!",
     "skin" => "materia",
     "theme" => "blue_deep_orange",
