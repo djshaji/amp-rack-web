@@ -78,7 +78,10 @@ $result = $q -> fetchAll () ;
               <a download href="<?php echo $card ["Download"] ;?>" class="btn btn-primary">Download</a>
             <?php } 
                if ($uid == $root_user && $card ["approved"] === null) { ?>
+                 <div class="mt-3 card-footer text-muted">
                    <a href="/approve.php?id=<?php echo $card ["id"] ;?>" class="btn btn-success">Approve</a>
+                   <a href="/delete.php?id=<?php echo $card ["id"] ;?>" class="btn btn-danger">Delete</a>
+                 </div>
 
             <?php }
             ?>

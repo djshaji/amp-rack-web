@@ -19,6 +19,8 @@ if ($_POST != null) {
   $s = "uid" ;
   $v = ":uid" ;
   foreach ($_FILES as $ftitle => $fname) {
+    if ($fname["size"] == 0)
+        continue ;
     $ext = explode ("/", $fname ["type"]);
     if ($ext [0] == "")
       $ext = "txt";
@@ -31,6 +33,8 @@ if ($_POST != null) {
     if (!move_uploaded_file ($fname ["tmp_name"], $filename)) {
       ?><div class="alert alert-danger h3"><?php
       // var_dump ($fname);
+      echo "<h3>";var_dump ($fname) ;echo "</h3>";
+      echo "<h1>Cannot upload $filename </h1>| Error code: ".$fname ["error"]."<br>";
       die (error_get_last ()["message"]);
     } else {
       $_POST [$ftitle] = $filename ;
