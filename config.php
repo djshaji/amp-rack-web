@@ -41,7 +41,8 @@ $config = array (
     $config ["drawer"] [$name] = "/view.php?type=" . $name ;
   }
   
-  $config ["drawer"]["Connect Guitar to Phone"] = "/anneli/about.php" ;
+  $config ["drawer"]["Connect Guitar to Phone"] = "/connect.php" ;
+  $config ["drawer"]["Frequently Asked Questions"] = "/faqs.php" ;
   $config ["drawer"]["About"] = "/anneli/about.php" ;
   $root_user = 'lWDjT6ENhgV9Hs6JHIjFAcacpAo1' ;
 ?>
