@@ -16,7 +16,7 @@ $config = array (
     "header-bg" => "primary",
     "footer" => true,
     "footer-bg" => "text-white bg-primary ",
-    "privacy-policy"=> null,
+    "privacy-policy"=> "https://amprack.acoustixaudio.org/privacy",
     "logo" => "/logo.png",
 
     "drawer" => array (),
