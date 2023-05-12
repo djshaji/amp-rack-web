@@ -4,6 +4,9 @@ require ("vendor/autoload.php");
 chdir (__DIR__);
 include "config.php";
 include "anneli/header.php";
+include "Parsedown.php" ;
+$file = file_get_contents('LICENSE.md');
+$Parsedown = new Parsedown();
 ?>
 
 <section class="m-3 p-3">
@@ -71,6 +74,30 @@ include "anneli/header.php";
         <p>Acoustix Audio does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p> </div>
   </div>
 </section>
+
+<div class="section row m-4 p-2 ">
+  <h3><i class="fas text-success me-2 fa-edit"></i>License Agreement</h3>
+  <div class="alert fw-bold m-2 bg-success">
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at<br><br>
+
+    <a class="nav-link" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br><br>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+  </div>
+  <br><br>
+  
+  <div class="col-md-7">
+    <?php //echo $Parsedown->text($file);
+    ?>
+  </div>
+</div>
 
 <?php
 include "anneli/footer.php";
