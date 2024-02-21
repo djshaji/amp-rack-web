@@ -114,6 +114,17 @@ if (isset ($_GET ["api"])) {
   </div>
 </div>
 
+<?php if (isset ($_GET ["my"])) { ?>
+<div class="row">
+  <div class="d-flex card-footer justify-content-center text-center">
+    <a href="/delete_account.php" class="btn btn-danger">
+      <i class="fas fa-trash bold me-2"></i>
+      Delete My Account
+    </a>
+  </div>
+</div>
+<?php } ?>
+
 <div class="d-flex justify-content-center">
   <ul class="pagination pagination-lg">
     <?php

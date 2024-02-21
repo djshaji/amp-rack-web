@@ -36,7 +36,7 @@ include "anneli/db.php";
       </div>
 
     </h4>
-    <div class="col-3 d-none shadow" id="preset">
+    <div class="col-md-3 d-none shadow" id="preset">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
