@@ -19,6 +19,12 @@
         "Download": "file"
     }, 
 
+    "Radio": {
+        "Title":"text",
+        "Description":"text",
+        "Download": "file"
+    },
+
     "Rhythm Loops": {
         "Title":"text",
         "Description":"text",

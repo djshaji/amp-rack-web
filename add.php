@@ -10,6 +10,7 @@ include "config.php";
 include "anneli/header.php";
 include "anneli/db.php";
 
+require_login ();
 $labels = array () ;
 $LABELS ["Download"] = "Upload " . $_GET ["type"] . " file" ;
 

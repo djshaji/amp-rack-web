@@ -6,3 +6,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f 
 RewriteRule ^(.*)$ $1.php
 Redirect /connect.html https://amprack.acoustixaudio.org/connect.php
+Redirect /app https://play.google.com/store/apps/details?id=com.shajikhan.ladspa.amprack

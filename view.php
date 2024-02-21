@@ -18,7 +18,7 @@ if ($uid == null && $_GET ["my"] != null) {
 
 function isAudio () {
   global $type ;
-  if ($type == "Drum Loops" || $type == "Rhythm Loops")
+  if ($type == "Drum Loops" || $type == "Rhythm Loops" || $type == "Radio")
     return true ;
   return false ;
 }
@@ -55,6 +55,12 @@ $q = $db -> prepare ($sql) ;
 $result = $q -> execute () ;
 $result = $q -> fetchAll () ;
 // var_dump ($result);
+if (isset ($_GET ["api"])) {
+  echo "------" ;
+  print (json_encode ($result));
+  echo "------" ;
+  die () ;
+}
 ?>
 <div class="section">
   <div class="alert alert-primary h2"><?php echo $type ;?></div>

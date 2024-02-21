@@ -11,6 +11,17 @@ include "anneli/header.php";
 ?>
 
 <div style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero.jpg');  background-repeat: no-repeat;background-position: center;background-size:cover;" class="px-4 py-5 mb-4 text-center">
+  <h5 class="alert alert-primary bold text-white">
+    <div class="card-title h3">
+      <i class="fas fa-info-circle"></i>
+      <b>#amprack</b> <span class="card-subtitle">get free pro</span>
+    </div>
+    For a limited time, 100 users can get free pro upgrade!<br>
+    <b>Just upload a video to any social media site with the hashtag #amprack and get free pro!</b> <br>
+    100 top trending videos will stand to win free pro upgrades every month.
+
+  </h5>
+
   <img class="d-block mx-auto mb-4 img-fluid" src="/logo.png" alt="" width="72" height="57">
   <h1 class="display-5 fw-bold text-white">Amp Rack 3</h1>
   <div class="col-lg-6 mx-auto">
@@ -25,6 +36,7 @@ include "anneli/header.php";
     <div class="justify-content-center">
         <a href="/view?type=Themes" type="button" class="btn btn-info"><i class="fas fa-image me-2"></i>Explore Themes</a>
         <a href="/view?type=Presets" type="button" class="btn btn-success"><i class="fas fa-list me-2"></i>Explore Presets</a>
+        <a href="javascript: show_menu ()" type="button" class="btn btn-primary"><i class="fas fa-bars me-2"></i>More</a>
     </div>
 
   </div>
@@ -100,3 +112,11 @@ include "anneli/header.php";
 <?php
 include "anneli/footer.php";
 ?>
+<script>
+function show_menu () {
+  window.scrollTo (0,0); 
+  t = document.getElementsByClassName ('mdl-layout__drawer-button') [0] ;
+  document.body.scrollTo (0,0)
+  t.click ()  
+}
+</script>
