@@ -1,7 +1,8 @@
 const firebaseConfig = {
     apiKey: "AIzaSyANGMMRsRUYO305VjmzpCrubx1LkhPWZHY",
     // authDomain: "amp-rack.firebaseapp.com",
-    authDomain: "acoustixaudio.org",
+    // authDomain: "acoustixaudio.org",
+    authDomain: location.host,
     projectId: "amp-rack",
     storageBucket: "amp-rack.appspot.com",
     messagingSenderId: "983863263684",

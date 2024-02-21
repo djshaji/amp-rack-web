@@ -8,7 +8,7 @@ include "config.php";
 include "anneli/header.php";
 include "anneli/ui.php" ;
 include_once "anneli/functions.php" ;
-if ($uid == null && $_GET ["my"] != null) {
+if ($uid == null) {
   require_login () ;
   die () ;
 }
@@ -56,7 +56,7 @@ include "anneli/db.php";
   </div>
 
   <div class="card-footer m-3">
-    <button class="btn btn-danger m-3">
+    <button onclick="deleteAllPresets ()" class="btn btn-danger m-3">
       <i class="fas text-bold fa-trash-alt me-2"></i>
       Delete all presets
       <div class="d-none spinner-grow spinner-grow-sm text-light ms-2" role="status">
@@ -65,7 +65,7 @@ include "anneli/db.php";
 
     </button>
 
-    <button class="btn btn-danger m-3">
+    <button onclick="deleteUser ()" class="btn btn-danger m-3">
       <i class="fas fa-user-times bold me-2"></i>
       Delete my account
       <div class="d-none spinner-grow spinner-grow-sm text-light ms-2" role="status">
@@ -102,6 +102,9 @@ function getPresets ()   {
         });
 
         document.getElementById ("preset-spinner").classList.add ("d-none")
+        if (presets.length == 0) {
+          Swal.fire ("No presets found", "You have not saved any presets.", "error")
+        }
     })
 
       
@@ -131,6 +134,66 @@ function deletePreset (element) {
     }
   });
 
+}
+
+function deleteAllPresets () {
+  if (presets == null) {
+    Swal.fire ("Load presets first and try again") ;
+    getPresets ();
+    return
+  }
+  Swal.fire({
+    title: "Do you want to delete all presets?",
+    showCancelButton: true,
+    confirmButtonColor: "#ff0000",
+    cancelButtonColor: "#009e12",
+    text: "Clicking delete will delete all presets. This action cannot be undone.",
+    confirmButtonText: "Delete",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      var batch = firebase.firestore ().batch();
+      for (l in presets) {
+        batch.delete (firebase.firestore ().collection ("presets").doc (l))
+      }
+
+      batch.commit().then(() => {
+        Swal.fire("Deleted", "Presets deleted successfully", "success").then (()=>location.reload());
+      }).catch((error) => {
+          Swal.fire("Unable to delete presets");
+      });
+
+    } else if (result.isDenied) {
+      // Swal.fire("Changes are not saved", "", "info");
+    }
+  });
+
+}
+
+function deleteUser () {
+  Swal.fire({
+    title: "Do you want to delete your account?",
+    showCancelButton: true,
+    confirmButtonColor: "#ff0000",
+    cancelButtonColor: "#009e12",
+    text: "Clicking delete will delete your account. This action cannot be undone. Delete your data before you delete your account.",
+    confirmButtonText: "Delete",
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      fireuser.delete().then(() => {
+        // User deleted.
+        Swal.fire ("You account has been deleted.", "Goodbye old friend, it has been nice knowing you", "success").then (()=> {
+          location.reload()
+        })
+      }).catch((error) => {
+        // An error ocurred
+        // ...
+        Swal.fire ("Unable to delete account", "Try logging out and logging in again.", "error")
+      });
+
+    }
+  })
 }
 
 // getPresets ()
